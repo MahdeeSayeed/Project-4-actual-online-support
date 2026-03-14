@@ -14,6 +14,8 @@ import ShopNow from "./Pages/ShopNow.jsx";
 import Store from "./Store.js";
 import WishList from "./Components/WishList.jsx";
 import { ToastContainer } from "react-toastify";
+import Signup from "./Components/Signup.jsx";
+import Login from "./Components/Login.jsx";
 
 const ErrorElement = () => {
   return (
@@ -34,8 +36,10 @@ const Router = createBrowserRouter([
       { path: "About", Component: About },
       { path: "ProductDetails/:id", Component: ProductDetails },
       { path: "CartPages", Component: CartPages },
-      { path: "CartItems", Component: CartItems },
+      { path: "CartItems/", Component: CartItems },
       { path: "WishList", Component: WishList },
+      { path: "/Signup", Component: Signup },
+      { path: "Login", Component: Login },
     ],
   },
 ]);

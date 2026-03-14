@@ -2,7 +2,7 @@ import { Rate } from "antd";
 import { CiHeart } from "react-icons/ci";
 import { FaRegEye } from "react-icons/fa";
 import { useDispatch, useSelector } from "react-redux";
-import { Bounce, toast } from 'react-toastify';
+import { Bounce, toast } from "react-toastify";
 import { useNavigate } from "react-router";
 import { CartReducer, SubtotalReducer } from "../Slice/ProductSlice";
 import Flex from "./Flex";
@@ -16,23 +16,21 @@ const Card = ({
   rating,
   id,
   ProductData,
-  
+  Wishlist
 }) => {
   let navigate = useNavigate();
-  const cardData = useSelector((state) => state.AllProducts.Cart);
-
+  const cartData = useSelector((state) => state.AllProducts.Cart);
 
   const dispatch = useDispatch();
 
   const handleProductDetails = () => {
     navigate(`/ProductDetails/${id}`);
-    dispatch(SubtotalReducer())
-    
+    dispatch(SubtotalReducer());
 
     localStorage.setItem("CartPages", JSON.stringify(ProductData));
   };
 
-   const notify = (matchitem) => {
+  const notify = (matchitem) => {
     matchitem == undefined
       ? toast("Product Succesfully added", {
           position: "top-right",
@@ -58,27 +56,26 @@ const Card = ({
         });
   };
 
-  const handleAddCart = () => {
-    console.log("Card ID:", id);
-    console.log("Cart Data:", cardData);
-    const matchitem = cardData.find((item) => item?.id == id);
-    console.log(matchitem);
-    console.log("ProductData:", ProductData);
+  const handleWishList = () => {
+    const matchitem = cartData.find((item) => item.id == id);
     if (!matchitem && ProductData) {
-      dispatch(CartReducer({...cardData,quantity: 1}));
+      // dispatch only the product data; reducer handles quantity
+      dispatch(CartReducer({...ProductData,quantity: 1}));
+      notify(undefined); // item added
+    } else {
+      notify(matchitem);
+      navigate('/Cart')
+    
     }
-
-    notify(matchitem);
   };
 
   return (
     <>
-      <div  className="group flex w-67.5 overflow-hidden mb-10">
+      <div className="group flex w-67.5 overflow-hidden mb-10">
         <div className="relative overflow-hidden">
           <div className="overflow-hidden">
             <img
-
-            onClick={handleProductDetails}
+              onClick={handleProductDetails}
               className="cursor-pointer"
               src={imgSRC}
               alt="console onClick={handleProductDetails} "
@@ -95,7 +92,7 @@ const Card = ({
             </div>
 
             <button
-              onClick={handleAddCart}
+              onClick={handleWishList}
               className="bg-black text-white py-3 absolute -bottom-6 left-0 w-full group-hover:bottom-0 duration-150 ease-linear cursor-pointer"
             >
               Add To Cart

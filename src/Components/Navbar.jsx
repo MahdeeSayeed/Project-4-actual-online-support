@@ -7,20 +7,55 @@ import { CiShoppingCart } from "react-icons/ci";
 import { HiMagnifyingGlass } from "react-icons/hi2";
 import { FaBarsStaggered } from "react-icons/fa6";
 import { BiCategory } from "react-icons/bi";
-import { NavLink } from "react-router";
+import { NavLink, useNavigate } from "react-router";
 import { useSelector } from 'react-redux';
 
 const Navbar = () => {
    const [show, setShow] = useState(false)
    
+   
+   const [Inputvalue, setInputvalue]= useState('')
+   const [FilterProducts, setFilterProducts]= useState([])
+   
+   let navigate = useNavigate();
+
+
    const handleClick=()=>{
 
      setShow(!show)
 
    }
  
-  const data= useSelector((state)=>state.AllProducts.Cart)
+    const handleSearch=(e)=>{
+     
 
+        const value= e.target.value
+
+        setInputvalue(value)
+ 
+        setInputvalue(e.target.value)
+        
+        if(Inputvalue.trim() == ''){
+
+           setFilterProducts([])
+
+        }else{
+         
+          const filterProduct= products.filter((item)=> item.title.toLowerCase().includes(Inputvalue.toLowerCase()))
+
+          setFilterProducts(filterProduct)
+         
+        }
+       
+    }
+    
+    console.log(FilterProducts)
+
+
+  const data= useSelector((state)=>state.AllProducts.Cart)
+  const products= useSelector((state)=>state.AllProducts.value)
+
+  
 
  
   return (
@@ -46,6 +81,8 @@ const Navbar = () => {
        <NavLink to="/" end>
       Home
         
+    
+    
       </NavLink>
       
       
@@ -58,7 +95,43 @@ const Navbar = () => {
     <Flex className='flex justify-center gap-2'>
   <div className='lg:flex justify-between items-center relative w-60.75 lg:w-auto mx-auto  '>  
         
- <input className=' py-2.5 pl-2 text-black bg-white' type='text'placeholder='What are you looking for?'/>
+ <input className=' py-2.5 pl-2 text-black bg-white' type='text'
+
+ value={Inputvalue}
+ 
+ placeholder='What are you looking for?'
+ 
+ onChange={handleSearch}
+ 
+ />
+
+   <ul className='bg-gray-400 absolute top-8 left-0 text-black '>
+
+      {/* {
+
+        FilterProducts.map((product)=>(
+          
+          <li key={products.id}>{products.title}</li>
+          ))
+
+
+      } */}
+
+      {FilterProducts.map((products)=>{ 
+        
+        return<li onClick={()=>navigate(`/ProductDetails/${products.id}`)} className='flex gap-2  border-b py-4 px-1.1 '>
+        
+        <img src={products.thumbnail}alt='' className='w-10 h-10'/>
+        
+        {products.title.slice(0,15)}
+        
+        
+        </li>})}
+
+
+   </ul>
+
+
 <div className='flex justify-between gap-4 items-center'>
   <div className='flex justify-between'>
     <div className='flex justify-between gap-1'>
@@ -76,7 +149,7 @@ const Navbar = () => {
 
   </NavLink>
 
-    <span className='absolute top-0 left-0 flex items-center justify-center w-5 h-5 rounded-full bg-primary text-white text-xs'>{data}</span>
+    <span className='absolute top-0 left-0 flex items-center justify-center w-5 h-5 rounded-full bg-primary text-white text-xs'>{data.lenght}</span>
   </div>
     </div>
    

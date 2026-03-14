@@ -1,8 +1,8 @@
 import React, { useEffect, useState } from 'react'
 import  Container  from './Container'
 import BreadCrumbs from './BreadCrumbs'
-import Gamepad1 from '../assets/Gamepad1.png';
-import Gamepad from '../assets/Gamepad.png';
+// import Gamepad1 from '../assets/Gamepad1.png';
+// import Gamepad from '../assets/Gamepad.png';
 import { Button, Flex } from 'antd';
 import { Rate } from 'antd';
 import axios from "axios";

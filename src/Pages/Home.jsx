@@ -15,6 +15,7 @@ import Footer from '../Components/Footer.jsx'
 import { TbLayoutNavbar } from 'react-icons/tb'
 import { Outlet } from 'react-router'
 import Navbar from '../Components/Navbar.jsx'
+import Signup from '../Components/Signup.jsx'
 
 
 const Home = () => {
@@ -22,14 +23,15 @@ const Home = () => {
     <>
    <Flex/>
    <Banner/>
+   <Signup/>
    <Flash/>
    <Categories/>
    <Months/>
    <Categories2/>
-   <Counter/>
-   <Products/>
+    <Counter/>
+    <Products/>
  
-   <Featured/>
+    <Featured/>
    <Footer/>
    <Outlet/>
     

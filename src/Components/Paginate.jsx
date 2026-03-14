@@ -2,7 +2,6 @@ import { useState } from "react";
 import ReactPaginate from "react-paginate";
 import { useSelector } from "react-redux";
 import Card from "./Card";
-
 function Items({ currentItems }) {
   return (
     <div className="gap-10 flex flex-row flex-wrap mb-4 ml-27 -mt-67">
@@ -11,6 +10,7 @@ function Items({ currentItems }) {
           key={item.id}
           imgSRC={item.thumbnail}
           id={item.id}
+          ProductData={item}
           // cover={<img src={item.thumbnail} alt={item.title} />}
         >
           <h3>{item.title}</h3>

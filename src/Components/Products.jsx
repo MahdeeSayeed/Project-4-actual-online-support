@@ -9,7 +9,7 @@ import camera from '../assets/Camera-2.png';
 import Laptop from '../assets/laptop3.png';
 
 
-const Products = ({children,title,heading}) => {
+const Products = ({children,title,heading, imgSRC}) => {
  
 
  

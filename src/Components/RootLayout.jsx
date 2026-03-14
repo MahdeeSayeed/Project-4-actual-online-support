@@ -13,6 +13,7 @@ import About from '../Pages/About';
 import Categories from './Categories';
 import Products from './Products';
 import RelatedItems from './RelatedItems';
+import Signup from './Signup'
 
 const RootLayout = () => {
   return (
